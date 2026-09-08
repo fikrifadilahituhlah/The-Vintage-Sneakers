@@ -111,16 +111,15 @@ window.VintageAuth = {
 };
 
 // ============================================================
-// CART — pakai db & auth yang sama di atas, biar gak bentrok
-// sama Firebase app yang udah diinisialisasi buat login
+// CART — use the same db and auth instances initialized above for sign-in.
 // ============================================================
 window.VintageCart = {
   // product = { id, name, price, image }, size = "42" misalnya
-  // return true kalau berhasil, false kalau gagal (misal belum login)
+  // Return true on success, false on failure (for example, when signed out).
   async addItem(product, size) {
     const user = auth.currentUser;
     if (!user) {
-      alert("Silakan login dulu untuk menambahkan ke keranjang.");
+      alert("Please sign in first to add items to your cart.");
       return false;
     }
 
@@ -146,13 +145,13 @@ window.VintageCart = {
       }
       return true;
     } catch (e) {
-      console.error("Gagal menambahkan ke keranjang:", e);
+      console.error("Failed to add item to cart:", e);
       return false;
     }
   },
 
-  // Ambil semua item di keranjang user yang lagi login.
-  // Return array kosong kalau belum login atau keranjang kosong.
+  // Load all items for the signed-in user's cart.
+  // Return an empty array when signed out or when the cart is empty.
   async getItems() {
     const user = auth.currentUser;
     if (!user) return [];
@@ -162,7 +161,7 @@ window.VintageCart = {
       const snap = await getDocs(itemsRef);
       return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
     } catch (e) {
-      console.error("Gagal mengambil data keranjang:", e);
+      console.error("Failed to load cart data:", e);
       return [];
     }
   },
@@ -180,12 +179,12 @@ window.VintageCart = {
       await updateDoc(doc(db, "carts", user.uid, "items", itemId), { qty });
       return true;
     } catch (e) {
-      console.error("Gagal mengubah jumlah item:", e);
+      console.error("Failed to update item quantity:", e);
       return false;
     }
   },
 
-  // Hapus satu item dari keranjang.
+  // Remove one item from the cart.
   async removeItem(itemId) {
     const user = auth.currentUser;
     if (!user) return false;
@@ -194,7 +193,7 @@ window.VintageCart = {
       await deleteDoc(doc(db, "carts", user.uid, "items", itemId));
       return true;
     } catch (e) {
-      console.error("Gagal menghapus item:", e);
+      console.error("Failed to remove item:", e);
       return false;
     }
   },
@@ -211,7 +210,7 @@ window.VintageCart = {
       });
       return true;
     } catch (e) {
-      console.error("Gagal menyimpan pesanan:", e);
+      console.error("Failed to save order:", e);
       return false;
     }
   },
@@ -227,7 +226,7 @@ window.VintageCart = {
         .map((order) => ({ id: order.id, ...order.data() }))
         .sort((first, second) => String(second.created_at || '').localeCompare(String(first.created_at || '')));
     } catch (e) {
-      console.error("Gagal mengambil riwayat pesanan:", e);
+      console.error("Failed to load order history:", e);
       return [];
     }
   }

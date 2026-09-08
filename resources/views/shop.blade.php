@@ -150,22 +150,22 @@
 
 <section class="direct-checkout-overlay" id="directCheckoutOverlay" aria-hidden="true">
   <div class="direct-checkout-modal" role="dialog" aria-modal="true" aria-labelledby="directCheckoutTitle">
-    <button type="button" class="direct-checkout-close" id="directCheckoutClose" aria-label="Tutup checkout">×</button>
+    <button type="button" class="direct-checkout-close" id="directCheckoutClose" aria-label="Close checkout">×</button>
     <div id="directCheckoutForm">
-      <div class="eyebrow">Kasir / Buy Now</div><h2 id="directCheckoutTitle">Selesaikan pembayaran.</h2>
-      <div class="direct-checkout-total"><span id="directProductName">Produk</span><strong id="directCheckoutTotal">Rp 0</strong></div>
-      <label class="direct-checkout-field">Nama pelanggan<input id="directCheckoutName" type="text" required></label>
-      <label class="direct-checkout-field">Nomor WhatsApp<input id="directCheckoutPhone" type="tel" placeholder="08xxxxxxxxxx" required></label>
-      <label class="direct-checkout-field">Alamat pengiriman<input id="directCheckoutAddress" type="text" placeholder="Nama jalan, nomor rumah" required></label>
-      <div class="direct-checkout-fields"><label class="direct-checkout-field">Kota<input id="directCheckoutCity" type="text" placeholder="Kota" required></label><label class="direct-checkout-field">Kode pos<input id="directCheckoutPostalCode" type="text" inputmode="numeric" placeholder="401xx" required></label></div>
-      <label class="direct-checkout-field">Kurir<select id="directCheckoutCourier" required><option value="">Pilih kurir</option><option value="JNE">JNE</option><option value="SiCepat">SiCepat</option><option value="GoSend">GoSend</option></select></label>
-      <div class="direct-voucher"><label class="direct-checkout-field">Kode voucher<input id="directVoucherCode" type="text" placeholder="Contoh: ONGKIRGRATIS"></label><button type="button" class="direct-voucher-apply" id="directApplyVoucher">Pakai voucher</button></div><p class="direct-voucher-message" id="directVoucherMessage" aria-live="polite"></p>
-      <div class="direct-checkout-field">Pilih metode pembayaran</div>
+      <div class="eyebrow">Buy Now</div><h2 id="directCheckoutTitle">Complete your purchase.</h2>
+      <div class="direct-checkout-total"><span id="directProductName">Product</span><strong id="directCheckoutTotal">Rp 0</strong></div>
+      <label class="direct-checkout-field">Customer name<input id="directCheckoutName" type="text" required></label>
+      <label class="direct-checkout-field">WhatsApp number<input id="directCheckoutPhone" type="tel" placeholder="08xxxxxxxxxx" required></label>
+      <label class="direct-checkout-field">Shipping address<input id="directCheckoutAddress" type="text" placeholder="Street name, house number" required></label>
+      <div class="direct-checkout-fields"><label class="direct-checkout-field">City<input id="directCheckoutCity" type="text" placeholder="City" required></label><label class="direct-checkout-field">Postal code<input id="directCheckoutPostalCode" type="text" inputmode="numeric" placeholder="401xx" required></label></div>
+      <label class="direct-checkout-field">Courier<select id="directCheckoutCourier" required><option value="">Select a courier</option><option value="JNE">JNE</option><option value="SiCepat">SiCepat</option><option value="GoSend">GoSend</option></select></label>
+      <div class="direct-voucher"><label class="direct-checkout-field">Voucher code<input id="directVoucherCode" type="text" placeholder="Example: ONGKIRGRATIS"></label><button type="button" class="direct-voucher-apply" id="directApplyVoucher">Apply voucher</button></div><p class="direct-voucher-message" id="directVoucherMessage" aria-live="polite"></p>
+      <div class="direct-checkout-field">Select a payment method</div>
       <div class="direct-payment-options" id="directPaymentOptions"><button type="button" class="direct-payment-option selected" data-method="QRIS">QRIS</button><button type="button" class="direct-payment-option" data-method="Transfer Bank">Transfer Bank</button><button type="button" class="direct-payment-option" data-method="Tunai" disabled>Tunai</button></div>
       <div class="direct-gateway-panel" id="directGatewayPanel"></div>
-      <button type="button" class="direct-checkout-submit" id="directConfirmPayment">Lanjut ke Pembayaran</button>
+      <button type="button" class="direct-checkout-submit" id="directConfirmPayment">Continue to Payment</button>
     </div>
-    <div class="direct-payment-success" id="directPaymentSuccess"><div class="direct-success-mark">✓</div><div class="eyebrow">Pembayaran berhasil</div><h2>Terima kasih.</h2><div class="direct-receipt"><div class="direct-receipt-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z"></path><path d="M9 7h6M9 11h6"></path></svg><span>Official purchase receipt</span></div><div class="direct-receipt-row"><span>No. transaksi</span><strong id="directReceiptId"></strong></div><div class="direct-receipt-row"><span>Waktu</span><strong id="directReceiptTime"></strong></div><div class="direct-receipt-row"><span>Produk</span><strong id="directReceiptProduct"></strong></div><div class="direct-receipt-row"><span>Metode</span><strong id="directReceiptMethod"></strong></div><div class="direct-receipt-total"><span>Total pembayaran</span><strong id="directReceiptTotal"></strong></div></div><div class="direct-success-actions"><button type="button" id="directPrintReceipt">Cek / Download Struk</button><a class="direct-warranty-link" id="directWarrantyLink" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-2.9 7.7-7 10-4.1-2.3-7-5.5-7-10V6l7-3Z"></path><path d="m9 12 2 2 4-4"></path></svg><span>Buka kartu garansi</span></a></div></div>
+    <div class="direct-payment-success" id="directPaymentSuccess"><div class="direct-success-mark">✓</div><div class="eyebrow">Payment successful</div><h2>Thank you.</h2><div class="direct-receipt"><div class="direct-receipt-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3 2V3Z"></path><path d="M9 7h6M9 11h6"></path></svg><span>Official purchase receipt</span></div><div class="direct-receipt-row"><span>Transaction ID</span><strong id="directReceiptId"></strong></div><div class="direct-receipt-row"><span>Time</span><strong id="directReceiptTime"></strong></div><div class="direct-receipt-row"><span>Product</span><strong id="directReceiptProduct"></strong></div><div class="direct-receipt-row"><span>Method</span><strong id="directReceiptMethod"></strong></div><div class="direct-receipt-total"><span>Total paid</span><strong id="directReceiptTotal"></strong></div></div><div class="direct-success-actions"><button type="button" id="directPrintReceipt">View / Download Receipt</button><a class="direct-warranty-link" id="directWarrantyLink" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-2.9 7.7-7 10-4.1-2.3-7-5.5-7-10V6l7-3Z"></path><path d="m9 12 2 2 4-4"></path></svg><span>Open warranty card</span></a></div></div>
   </div>
 </section>
 
@@ -228,7 +228,7 @@
   const printDirectReceipt = () => {
     const receiptWindow = window.open('', '_blank', 'width=520,height=700');
     if (!receiptWindow) return;
-    receiptWindow.document.write(`<!doctype html><html lang="id"><head><title>Struk ${document.getElementById('directReceiptId').textContent}</title><style>body{font:14px Arial,sans-serif;max-width:420px;margin:40px auto;color:#17130f}h1{font-size:24px;border-bottom:2px solid #17130f;padding-bottom:16px}p{line-height:1.7}.total{border-top:1px solid #999;margin-top:20px;padding-top:14px;font-weight:bold;display:flex;justify-content:space-between}</style></head><body><h1>THE VINTAGE SNEAKERS</h1><p><strong>PEMBAYARAN BERHASIL</strong></p><p>No. transaksi: ${document.getElementById('directReceiptId').textContent}<br>Waktu: ${document.getElementById('directReceiptTime').textContent}<br>Produk: ${document.getElementById('directReceiptProduct').textContent}<br>Metode: ${document.getElementById('directReceiptMethod').textContent}</p><p class="total"><span>Total dibayar</span><span>${document.getElementById('directReceiptTotal').textContent}</span></p><script>window.onload=()=>window.print();<\/script></body></html>`);
+    receiptWindow.document.write(`<!doctype html><html lang="en"><head><title>Receipt ${document.getElementById('directReceiptId').textContent}</title><style>body{font:14px Arial,sans-serif;max-width:420px;margin:40px auto;color:#17130f}h1{font-size:24px;border-bottom:2px solid #17130f;padding-bottom:16px}p{line-height:1.7}.total{border-top:1px solid #999;margin-top:20px;padding-top:14px;font-weight:bold;display:flex;justify-content:space-between}</style></head><body><h1>THE VINTAGE SNEAKERS</h1><p><strong>PAYMENT SUCCESSFUL</strong></p><p>Transaction ID: ${document.getElementById('directReceiptId').textContent}<br>Time: ${document.getElementById('directReceiptTime').textContent}<br>Product: ${document.getElementById('directReceiptProduct').textContent}<br>Method: ${document.getElementById('directReceiptMethod').textContent}</p><p class="total"><span>Total paid</span><span>${document.getElementById('directReceiptTotal').textContent}</span></p><script>window.onload=()=>window.print();<\/script></body></html>`);
     receiptWindow.document.close();
   };
   directPrintReceipt?.addEventListener('click', printDirectReceipt);
@@ -297,7 +297,7 @@
     if (!requireLogin()) return;
 
     addToCartButton.disabled = true;
-    addToCartButton.textContent = 'Menambahkan...';
+    addToCartButton.textContent = 'Adding...';
 
     const success = await window.VintageCart.addItem(currentProduct, selectedSize);
     if (success) window.refreshCartBadge?.();
@@ -319,7 +319,7 @@
     if (!requireLogin()) return;
 
     buyNowButton.disabled = true;
-    buyNowButton.textContent = 'Membuka pembayaran...';
+    buyNowButton.textContent = 'Opening payment...';
     directSubtotal = Number(currentProduct.price);
     directProductName.textContent = `${currentProduct.name} / Size ${selectedSize}`;
     directVoucherCode.value = '';
@@ -337,7 +337,7 @@
     directPaymentStarted = false;
     directGatewayPanel.classList.remove('active');
     directConfirmPayment.disabled = false;
-    directConfirmPayment.textContent = 'Lanjut ke Pembayaran';
+    directConfirmPayment.textContent = 'Continue to Payment';
     directCheckoutForm.style.display = 'block';
     directPaymentSuccess.classList.remove('active');
     directCheckoutOverlay.classList.add('active');
@@ -356,7 +356,7 @@
       directPaymentMethod = option.dataset.method;
       directPaymentStarted = false;
       directGatewayPanel.classList.remove('active');
-      directConfirmPayment.textContent = 'Lanjut ke Pembayaran';
+      directConfirmPayment.textContent = 'Continue to Payment';
       document.querySelectorAll('.direct-payment-option').forEach((item) => item.classList.toggle('selected', item === option));
     });
   });
@@ -365,10 +365,10 @@
     await window.promotionReady;
     directPromotion = window.calculatePromotion(directVoucherCode.value, directSubtotal, directShippingFee);
     if (!directPromotion.valid) {
-      directVoucherMessage.textContent = 'Kode voucher tidak ditemukan.';
+      directVoucherMessage.textContent = 'Voucher code not found.';
       directVoucherMessage.classList.add('invalid');
     } else {
-      directVoucherMessage.textContent = `${directPromotion.label} diterapkan.`;
+      directVoucherMessage.textContent = `${directPromotion.label} applied.`;
       directVoucherMessage.classList.remove('invalid');
     }
     updateDirectTotal();
@@ -390,7 +390,7 @@
         : '<strong>Transfer Bank Demo</strong><span>Transfer ke rekening demo berikut.</span><div class="direct-gateway-code">BCA 1234 5678 90</div>';
       directGatewayPanel.classList.add('active');
       directPaymentStarted = true;
-      directConfirmPayment.textContent = 'Saya Sudah Membayar';
+      directConfirmPayment.textContent = 'I Have Paid';
       return;
     }
     directConfirmPayment.disabled = true;
@@ -399,7 +399,7 @@
       await window.refreshPromotions();
       directPromotion = window.calculatePromotion(directVoucherCode.value, directSubtotal, directShippingFee);
       const transactionId = `TVS-${Date.now().toString().slice(-8)}`;
-      const transactionTime = new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date());
+      const transactionTime = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date());
       const directTotal = directPromotion.valid ? directPromotion.total : directSubtotal + directShippingFee;
       const orderSaved = await window.VintageCart.saveOrder({
       transaction_id: transactionId,
@@ -413,9 +413,9 @@
       status: 'paid',
       });
       if (!orderSaved) {
-        alert('Transaksi gagal disimpan ke Firebase. Pastikan akun sudah login dan Firebase Rules mengizinkan penulisan order.');
+        alert('The transaction could not be saved to Firebase. Make sure you are signed in and Firebase Rules allow orders to be written.');
         directConfirmPayment.disabled = false;
-        directConfirmPayment.textContent = 'Saya Sudah Membayar';
+        directConfirmPayment.textContent = 'I Have Paid';
         return;
       }
       directCheckoutForm.style.display = 'none';
@@ -429,10 +429,10 @@
       warrantyUrl.search = new URLSearchParams({ purchase_id: transactionId, name: currentProduct.name, size: selectedSize, customer: directCheckoutName.value.trim(), email: window.shopUser?.email || '' });
       directWarrantyLink.href = warrantyUrl.toString();
     } catch (error) {
-      console.error('Checkout gagal:', error);
-      alert('Checkout gagal diproses. Silakan coba lagi.');
+      console.error('Checkout failed:', error);
+      alert('Checkout could not be processed. Please try again.');
       directConfirmPayment.disabled = false;
-      directConfirmPayment.textContent = 'Saya Sudah Membayar';
+      directConfirmPayment.textContent = 'I Have Paid';
       return;
     }
   });

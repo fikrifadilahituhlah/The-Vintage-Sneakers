@@ -5,7 +5,7 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 export async function addToCart(product) {
   const user = auth.currentUser;
   if (!user) {
-    alert("Silakan login dulu");
+    alert("Please sign in first.");
     return;
   }
 
@@ -23,7 +23,7 @@ export async function addToCart(product) {
     });
   }
 
-  alert("Berhasil ditambahkan ke keranjang!");
+  alert("Added to cart successfully!");
 }
 
 // biar bisa dipanggil dari onclick di Blade

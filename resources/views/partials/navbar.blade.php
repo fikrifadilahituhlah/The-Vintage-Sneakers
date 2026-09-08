@@ -192,8 +192,8 @@
   const renderCartDropdown = (items) => {
     if (!items.length) {
       cartDropdown.innerHTML = `
-        <div class="cd-empty">Keranjang kamu masih kosong.</div>
-        <a href="{{ route('shop') }}" class="cd-view-all">Lihat Katalog</a>
+        <div class="cd-empty">Your cart is empty.</div>
+        <a href="{{ route('shop') }}" class="cd-view-all">View Catalog</a>
       `;
       return;
     }
@@ -208,9 +208,9 @@
             <h4>${item.name}</h4>
             <p>Size ${item.size}</p>
             <div class="cd-qty">
-              <button type="button" class="cd-minus" aria-label="Kurangi">−</button>
+              <button type="button" class="cd-minus" aria-label="Decrease quantity">−</button>
               <span>${item.qty}</span>
-              <button type="button" class="cd-plus" aria-label="Tambah">+</button>
+              <button type="button" class="cd-plus" aria-label="Increase quantity">+</button>
             </div>
           </div>
           <div>
@@ -317,8 +317,8 @@
     } catch (error) {
       console.error(error);
       message.textContent = error.code === 'auth/popup-closed-by-user'
-        ? 'Login dibatalkan.'
-        : 'Login Google gagal. Aktifkan Google provider di Firebase Authentication.';
+        ? 'Sign-in cancelled.'
+        : 'Google sign-in failed. Enable the Google provider in Firebase Authentication.';
       googleSignInButton.disabled = false;
       googleSignInButton.innerHTML = '<span class="google-mark">G</span> Continue with Google';
     }

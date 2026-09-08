@@ -41,7 +41,7 @@ const startPromotionListener = () => {
   }
 
   onSnapshot(collection(db, 'promotions'), applyVoucherSnapshot, (error) => {
-    console.error('Gagal memuat voucher realtime:', error);
+    console.error('Failed to load real-time vouchers:', error);
     vouchers = { ...DEFAULT_VOUCHERS };
     resolvePromotionReady();
   });
@@ -61,7 +61,7 @@ const refreshPromotions = async () => {
     ]);
     if (snapshot) applyVoucherSnapshot(snapshot);
   } catch (error) {
-    console.error('Gagal menyegarkan voucher:', error);
+    console.error('Failed to refresh vouchers:', error);
   }
 };
 

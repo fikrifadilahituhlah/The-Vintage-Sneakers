@@ -172,9 +172,9 @@ class PageController extends Controller
         ])), 0, 10));
 
         return view('warranty-card', [
-            'customerName' => $request->string('customer')->trim()->value() ?: 'Nama pelanggan',
-            'customerEmail' => $request->string('email')->trim()->value() ?: 'email pelanggan',
-            'productName' => $request->string('name')->trim()->value() ?: 'Nama sepatu',
+            'customerName' => $request->string('customer')->trim()->value() ?: 'Customer name',
+            'customerEmail' => $request->string('email')->trim()->value() ?: 'Customer email',
+            'productName' => $request->string('name')->trim()->value() ?: 'Sneaker name',
             'size' => $request->string('size')->trim()->value() ?: '-',
             'purchaseDate' => $purchaseDate,
             'expiresAt' => $purchaseDate->copy()->addMonths($warrantyMonths),

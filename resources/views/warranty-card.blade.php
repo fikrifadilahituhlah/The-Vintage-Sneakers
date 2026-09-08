@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kartu Garansi {{ $productName }} - The Vintage Sneakers</title>
+  <title>Warranty Card {{ $productName }} - The Vintage Sneakers</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -31,7 +31,7 @@
   </style>
 </head>
 <body>
-  <div class="print-actions"><button type="button" onclick="window.print()">Cetak / Simpan PDF</button><a href="{{ route('shop') }}">Kembali ke shop</a></div>
+  <div class="print-actions"><button type="button" onclick="window.print()">Print / Save PDF</button><a href="{{ route('shop') }}">Back to shop</a></div>
   <main class="warranty-card">
     <header class="card-head">
       <div><div class="brand">The Vintage Sneakers</div><div class="eyebrow">Official warranty card</div><h1>Pair<br>protected.</h1></div>
@@ -39,17 +39,17 @@
     </header>
     <div class="card-grid">
       <section>
-        <div class="field"><label>Nama</label><p>{{ $customerName }}</p></div>
+        <div class="field"><label>Name</label><p>{{ $customerName }}</p></div>
         <div class="field"><label>Email</label><p>{{ $customerEmail }}</p></div>
-        <div class="field"><label>Pair terdaftar</label><p>{{ $productName }} / Size {{ $size }}</p></div>
-        <div class="field"><label>Tanggal pembelian</label><p>{{ $purchaseDate->translatedFormat('d F Y') }}</p></div>
+        <div class="field"><label>Registered pair</label><p>{{ $productName }} / Size {{ $size }}</p></div>
+        <div class="field"><label>Purchase date</label><p>{{ $purchaseDate->locale('en')->translatedFormat('d F Y') }}</p></div>
       </section>
       <aside>
-        <div class="stamp"><strong>{{ $warrantyMonths }} BULAN</strong><span>Perlindungan kondisi</span></div>
-        <div class="field"><label>Berlaku sampai</label><p>{{ $expiresAt->translatedFormat('d F Y') }}</p></div>
+        <div class="stamp"><strong>{{ $warrantyMonths }} MONTHS</strong><span>Condition coverage</span></div>
+        <div class="field"><label>Valid until</label><p>{{ $expiresAt->locale('en')->translatedFormat('d F Y') }}</p></div>
       </aside>
     </div>
-    <section class="terms"><strong>Ketentuan singkat</strong><ul><li>Garansi berlaku {{ $warrantyMonths }} bulan sejak tanggal pembelian untuk cacat material atau pekerjaan yang menjadi tanggung jawab The Vintage Sneakers.</li><li>Garansi keaslian berlaku seumur hidup berdasarkan provenance file pasangan ini.</li><li>Tidak mencakup aus pemakaian, perubahan warna alami, kerusakan karena air/panas, salah perawatan, atau reparasi pihak lain.</li><li>Simpan kartu ini dan bukti pembelian. Hubungi kami melalui WhatsApp untuk pengajuan klaim.</li></ul></section>
+    <section class="terms"><strong>Terms at a glance</strong><ul><li>This warranty is valid for {{ $warrantyMonths }} months from the purchase date and covers material or workmanship defects for which The Vintage Sneakers is responsible.</li><li>The authenticity guarantee is valid for the lifetime of the pair based on its provenance file.</li><li>It does not cover wear and tear, natural color changes, water or heat damage, improper care, or repairs by third parties.</li><li>Keep this card and your proof of purchase. Contact us via WhatsApp to submit a claim.</li></ul></section>
     <footer class="card-foot"><span>Every pair verified by hand.<br>Jl. Braga No. 12, Bandung</span><span>the.vintagesneakers<br>Warranty department</span></footer>
   </main>
 </body>

@@ -179,23 +179,23 @@
     <div class="floorplan-gallery">
       <div class="section-head floorplan-heading">
         <div class="eyebrow">Our Space</div>
-        <h2>Side Plans</h2>
+        <h2>Site Plans</h2>
       </div>
       <div class="floorplan-grid">
         <figure class="floorplan-card">
-          <img src="{{ asset('images/denahtoko.jpg') }}" alt="Denah Kantor">
+          <img src="{{ asset('images/denahtoko.jpg') }}" alt="Office floor plan">
           <figcaption>Office</figcaption>
         </figure>
         <figure class="floorplan-card">
-          <img src="{{ asset('images/denahtokolantai1.jpg') }}" alt="Denah toko lantai satu">
+          <img src="{{ asset('images/denahtokolantai1.jpg') }}" alt="First-floor store plan">
           <figcaption>Store, floor 1</figcaption>
         </figure>
         <figure class="floorplan-card">
-          <img src="{{ asset('images/denahcafelantai2.jpg') }}" alt="Denah kafe lantai dua">
+          <img src="{{ asset('images/denahcafelantai2.jpg') }}" alt="Second-floor cafe plan">
           <figcaption>Cafe, floor 2</figcaption>
         </figure>
         <figure class="floorplan-card">
-          <img src="{{ asset('images/denahproduksi.jpg') }}" alt="Denah area produksi">
+          <img src="{{ asset('images/denahproduksi.jpg') }}" alt="Production area plan">
           <figcaption>Production area</figcaption>
         </figure>
       </div>

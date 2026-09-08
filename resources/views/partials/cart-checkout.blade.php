@@ -11,20 +11,20 @@
 
 <section class="cart-checkout-overlay" id="cartCheckoutOverlay" aria-hidden="true">
   <div class="cart-checkout-modal" role="dialog" aria-modal="true" aria-labelledby="cartCheckoutTitle">
-    <button type="button" class="cart-checkout-close" id="cartCheckoutClose" aria-label="Tutup checkout">×</button>
+    <button type="button" class="cart-checkout-close" id="cartCheckoutClose" aria-label="Close checkout">×</button>
     <div id="cartCheckoutFormView">
-      <div class="eyebrow">Kasir / Checkout</div><h2 id="cartCheckoutTitle">Selesaikan pembayaran.</h2>
-      <div class="cart-checkout-total"><span>Total belanja</span><strong id="cartCheckoutTotal">Rp 0</strong></div>
-      <label class="cart-checkout-field">Nama pelanggan<input id="cartCheckoutName" type="text" required></label>
-      <label class="cart-checkout-field">Nomor WhatsApp<input id="cartCheckoutPhone" type="tel" placeholder="08xxxxxxxxxx" required></label>
-      <label class="cart-checkout-field">Alamat pengiriman<input id="cartCheckoutAddress" type="text" placeholder="Nama jalan, nomor rumah" required></label>
-      <div class="cart-checkout-fields"><label class="cart-checkout-field">Kota<input id="cartCheckoutCity" type="text" placeholder="Kota" required></label><label class="cart-checkout-field">Kode pos<input id="cartCheckoutPostalCode" type="text" inputmode="numeric" placeholder="401xx" required></label></div>
-      <label class="cart-checkout-field">Kurir<select id="cartCheckoutCourier" required><option value="">Pilih kurir</option><option value="JNE">JNE</option><option value="SiCepat">SiCepat</option><option value="GoSend">GoSend</option></select></label>
-      <div class="cart-checkout-voucher"><label class="cart-checkout-field">Kode voucher<input id="cartCheckoutVoucher" type="text" placeholder="Contoh: ONGKIRGRATIS"></label><button type="button" id="cartCheckoutApplyVoucher">Pakai voucher</button></div><p class="cart-checkout-message" id="cartCheckoutMessage" aria-live="polite"></p>
-      <div class="cart-checkout-field">Pilih metode pembayaran</div><div class="cart-checkout-payment" id="cartCheckoutPayment"><button type="button" class="selected" data-method="QRIS">QRIS</button><button type="button" data-method="Transfer Bank">Transfer Bank</button><button type="button" data-method="Tunai">Tunai</button></div>
-      <div class="cart-checkout-gateway" id="cartCheckoutGateway"></div><button type="button" class="cart-checkout-submit" id="cartCheckoutSubmit">Lanjut ke Pembayaran</button>
+      <div class="eyebrow">Checkout</div><h2 id="cartCheckoutTitle">Complete your purchase.</h2>
+      <div class="cart-checkout-total"><span>Order total</span><strong id="cartCheckoutTotal">Rp 0</strong></div>
+      <label class="cart-checkout-field">Customer name<input id="cartCheckoutName" type="text" required></label>
+      <label class="cart-checkout-field">WhatsApp number<input id="cartCheckoutPhone" type="tel" placeholder="08xxxxxxxxxx" required></label>
+      <label class="cart-checkout-field">Shipping address<input id="cartCheckoutAddress" type="text" placeholder="Street name, house number" required></label>
+      <div class="cart-checkout-fields"><label class="cart-checkout-field">City<input id="cartCheckoutCity" type="text" placeholder="City" required></label><label class="cart-checkout-field">Postal code<input id="cartCheckoutPostalCode" type="text" inputmode="numeric" placeholder="401xx" required></label></div>
+      <label class="cart-checkout-field">Courier<select id="cartCheckoutCourier" required><option value="">Select a courier</option><option value="JNE">JNE</option><option value="SiCepat">SiCepat</option><option value="GoSend">GoSend</option></select></label>
+      <div class="cart-checkout-voucher"><label class="cart-checkout-field">Voucher code<input id="cartCheckoutVoucher" type="text" placeholder="Example: ONGKIRGRATIS"></label><button type="button" id="cartCheckoutApplyVoucher">Apply voucher</button></div><p class="cart-checkout-message" id="cartCheckoutMessage" aria-live="polite"></p>
+      <div class="cart-checkout-field">Select a payment method</div><div class="cart-checkout-payment" id="cartCheckoutPayment"><button type="button" class="selected" data-method="QRIS">QRIS</button><button type="button" data-method="Bank Transfer">Bank Transfer</button><button type="button" data-method="Cash">Cash</button></div>
+      <div class="cart-checkout-gateway" id="cartCheckoutGateway"></div><button type="button" class="cart-checkout-submit" id="cartCheckoutSubmit">Continue to Payment</button>
     </div>
-    <div class="cart-checkout-success" id="cartCheckoutSuccess"><div class="cart-checkout-success-mark">✓</div><div class="eyebrow">Pembayaran berhasil</div><h2>Terima kasih.</h2><div class="cart-checkout-receipt"><div>No. transaksi: <strong id="cartCheckoutReceiptId"></strong></div><div>Metode: <strong id="cartCheckoutReceiptMethod"></strong></div><div>Voucher: <strong id="cartCheckoutReceiptVoucher"></strong></div><div class="cart-checkout-receipt-total"><span>Total dibayar</span><strong id="cartCheckoutReceiptTotal"></strong></div></div><div class="cart-checkout-actions"><button type="button" id="cartCheckoutPrintReceipt">Cek / Download Struk</button><a class="cart-checkout-warranty" id="cartCheckoutWarrantyLink" href="#" target="_blank" rel="noopener">Buka kartu garansi</a></div></div>
+    <div class="cart-checkout-success" id="cartCheckoutSuccess"><div class="cart-checkout-success-mark">✓</div><div class="eyebrow">Payment successful</div><h2>Thank you.</h2><div class="cart-checkout-receipt"><div>Transaction ID: <strong id="cartCheckoutReceiptId"></strong></div><div>Method: <strong id="cartCheckoutReceiptMethod"></strong></div><div>Voucher: <strong id="cartCheckoutReceiptVoucher"></strong></div><div class="cart-checkout-receipt-total"><span>Total paid</span><strong id="cartCheckoutReceiptTotal"></strong></div></div><div class="cart-checkout-actions"><button type="button" id="cartCheckoutPrintReceipt">View / Download Receipt</button><a class="cart-checkout-warranty" id="cartCheckoutWarrantyLink" href="#" target="_blank" rel="noopener">Open warranty card</a></div></div>
   </div>
 </section>
 
@@ -50,7 +50,7 @@
   const printCheckoutReceipt = () => {
     const receiptWindow = window.open('', '_blank', 'width=520,height=700');
     if (!receiptWindow) return;
-    receiptWindow.document.write(`<!doctype html><html lang="id"><head><title>Struk ${completedTransaction.id}</title><style>body{font:14px Arial,sans-serif;max-width:420px;margin:40px auto;color:#17130f}h1{font-size:24px;border-bottom:2px solid #17130f;padding-bottom:16px}p{line-height:1.7}.total{border-top:1px solid #999;margin-top:20px;padding-top:14px;font-weight:bold;display:flex;justify-content:space-between}</style></head><body><h1>THE VINTAGE SNEAKERS</h1><p><strong>PEMBAYARAN BERHASIL</strong></p><p>No. transaksi: ${completedTransaction.id}<br>Waktu: ${completedTransaction.time}<br>Metode: ${completedTransaction.method}<br>Voucher: ${completedTransaction.voucher}</p><p class="total"><span>Total dibayar</span><span>${completedTransaction.total}</span></p><script>window.onload=()=>window.print();<\/script></body></html>`);
+    receiptWindow.document.write(`<!doctype html><html lang="en"><head><title>Receipt ${completedTransaction.id}</title><style>body{font:14px Arial,sans-serif;max-width:420px;margin:40px auto;color:#17130f}h1{font-size:24px;border-bottom:2px solid #17130f;padding-bottom:16px}p{line-height:1.7}.total{border-top:1px solid #999;margin-top:20px;padding-top:14px;font-weight:bold;display:flex;justify-content:space-between}</style></head><body><h1>THE VINTAGE SNEAKERS</h1><p><strong>PAYMENT SUCCESSFUL</strong></p><p>Transaction ID: ${completedTransaction.id}<br>Time: ${completedTransaction.time}<br>Method: ${completedTransaction.method}<br>Voucher: ${completedTransaction.voucher}</p><p class="total"><span>Total paid</span><span>${completedTransaction.total}</span></p><script>window.onload=()=>window.print();<\/script></body></html>`);
     receiptWindow.document.close();
   };
 
@@ -72,7 +72,7 @@
     checkoutMessage.textContent = '';
     paymentStarted = false;
     checkoutGateway.classList.remove('active');
-    checkoutSubmit.textContent = 'Lanjut ke Pembayaran';
+    checkoutSubmit.textContent = 'Continue to Payment';
     refreshCheckoutTotal();
     checkoutOverlay.classList.add('active');
     checkoutOverlay.setAttribute('aria-hidden', 'false');
@@ -83,26 +83,26 @@
   });
   document.getElementById('cartCheckoutClose')?.addEventListener('click', () => { checkoutOverlay.classList.remove('active'); checkoutOverlay.setAttribute('aria-hidden', 'true'); });
   checkoutOverlay?.addEventListener('click', (event) => { if (event.target === checkoutOverlay) checkoutOverlay.classList.remove('active'); });
-  document.getElementById('cartCheckoutApplyVoucher')?.addEventListener('click', async () => { await window.promotionReady; promotion = window.calculatePromotion(checkoutVoucher.value, checkoutItems.reduce((sum, item) => sum + item.price * item.qty, 0), shippingFee); checkoutMessage.textContent = promotion.valid ? `${promotion.label} diterapkan.` : 'Kode voucher tidak ditemukan.'; checkoutMessage.classList.toggle('invalid', !promotion.valid); refreshCheckoutTotal(); });
-  document.querySelectorAll('#cartCheckoutPayment button').forEach((button) => button.addEventListener('click', () => { selectedPayment = button.dataset.method; paymentStarted = false; checkoutSubmit.textContent = 'Lanjut ke Pembayaran'; checkoutGateway.classList.remove('active'); document.querySelectorAll('#cartCheckoutPayment button').forEach((item) => item.classList.toggle('selected', item === button)); }));
+  document.getElementById('cartCheckoutApplyVoucher')?.addEventListener('click', async () => { await window.promotionReady; promotion = window.calculatePromotion(checkoutVoucher.value, checkoutItems.reduce((sum, item) => sum + item.price * item.qty, 0), shippingFee); checkoutMessage.textContent = promotion.valid ? `${promotion.label} applied.` : 'Voucher code not found.'; checkoutMessage.classList.toggle('invalid', !promotion.valid); refreshCheckoutTotal(); });
+  document.querySelectorAll('#cartCheckoutPayment button').forEach((button) => button.addEventListener('click', () => { selectedPayment = button.dataset.method; paymentStarted = false; checkoutSubmit.textContent = 'Continue to Payment'; checkoutGateway.classList.remove('active'); document.querySelectorAll('#cartCheckoutPayment button').forEach((item) => item.classList.toggle('selected', item === button)); }));
 
   checkoutSubmit?.addEventListener('click', async () => {
     const fields = ['cartCheckoutName', 'cartCheckoutPhone', 'cartCheckoutAddress', 'cartCheckoutCity', 'cartCheckoutPostalCode', 'cartCheckoutCourier'].map((id) => document.getElementById(id));
     if (!fields.every((field) => field.value.trim())) { fields.find((field) => !field.value.trim())?.reportValidity(); return; }
-    if (!paymentStarted) { checkoutGateway.innerHTML = `<strong>${selectedPayment} Demo</strong><br>Gunakan nominal total di atas untuk menyelesaikan pembayaran.`; checkoutGateway.classList.add('active'); paymentStarted = true; checkoutSubmit.textContent = 'Saya Sudah Membayar'; return; }
+    if (!paymentStarted) { checkoutGateway.innerHTML = `<strong>${selectedPayment} Demo</strong><br>Use the total above to complete your payment.`; checkoutGateway.classList.add('active'); paymentStarted = true; checkoutSubmit.textContent = 'I Have Paid'; return; }
     await window.refreshPromotions();
     refreshCheckoutTotal();
     const total = promotion.valid ? promotion.total : checkoutItems.reduce((sum, item) => sum + item.price * item.qty, 0) + shippingFee;
     const transactionId = `TVS-${Date.now().toString().slice(-8)}`;
-    const transactionTime = new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date());
+    const transactionTime = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date());
     const orderSaved = await window.VintageCart.saveOrder({ transaction_id: transactionId, customer: fields[0].value.trim(), phone: fields[1].value.trim(), shipping: { address: fields[2].value.trim(), city: fields[3].value.trim(), postal_code: fields[4].value.trim(), courier: fields[5].value }, items: checkoutItems, total, voucher: promotion.valid ? { code: promotion.code, label: promotion.label, discount: promotion.discount, cashback: promotion.cashback, shipping_discount: promotion.shippingDiscount } : null, payment_method: selectedPayment, status: 'paid' });
-    if (!orderSaved) { alert('Transaksi gagal disimpan ke Firebase.'); return; }
+    if (!orderSaved) { alert('The transaction could not be saved to Firebase.'); return; }
     await Promise.all(checkoutItems.map((item) => window.VintageCart.removeItem(item.id)));
     document.getElementById('cartCheckoutReceiptId').textContent = transactionId;
     document.getElementById('cartCheckoutReceiptMethod').textContent = selectedPayment;
-    document.getElementById('cartCheckoutReceiptVoucher').textContent = promotion.valid ? promotion.code : 'Tidak ada';
+    document.getElementById('cartCheckoutReceiptVoucher').textContent = promotion.valid ? promotion.code : 'None';
     document.getElementById('cartCheckoutReceiptTotal').textContent = `Rp ${formatIDR(total)}`;
-    completedTransaction = { id: transactionId, time: transactionTime, method: selectedPayment, voucher: promotion.valid ? promotion.code : 'Tidak ada', total: `Rp ${formatIDR(total)}` };
+    completedTransaction = { id: transactionId, time: transactionTime, method: selectedPayment, voucher: promotion.valid ? promotion.code : 'None', total: `Rp ${formatIDR(total)}` };
     const warrantyProduct = checkoutItems[0];
     const warrantyUrl = new URL('{{ route("warranty.card") }}', window.location.origin);
     warrantyUrl.search = new URLSearchParams({ purchase_id: transactionId, name: warrantyProduct.name, size: warrantyProduct.size || '-', customer: fields[0].value.trim(), email: window.shopUser?.email || '' });

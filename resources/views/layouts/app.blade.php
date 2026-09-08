@@ -17,7 +17,7 @@
 
 <div class="success-toast" id="successToast" role="status" aria-live="polite" aria-hidden="true">
   <span class="success-toast-icon" aria-hidden="true">✓</span>
-  <span>Request berhasil terkirim. Terima kasih!</span>
+  <span>Request sent successfully. Thank you!</span>
 </div>
 
 @yield('content')
