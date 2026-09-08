@@ -83,7 +83,7 @@
   });
   document.getElementById('cartCheckoutClose')?.addEventListener('click', () => { checkoutOverlay.classList.remove('active'); checkoutOverlay.setAttribute('aria-hidden', 'true'); });
   checkoutOverlay?.addEventListener('click', (event) => { if (event.target === checkoutOverlay) checkoutOverlay.classList.remove('active'); });
-  document.getElementById('cartCheckoutApplyVoucher')?.addEventListener('click', async () => { await window.promotionReady; promotion = window.calculatePromotion(checkoutVoucher.value, checkoutItems.reduce((sum, item) => sum + item.price * item.qty, 0), shippingFee); checkoutMessage.textContent = promotion.valid ? `${promotion.label} applied.` : 'Voucher code not found.'; checkoutMessage.classList.toggle('invalid', !promotion.valid); refreshCheckoutTotal(); });
+  document.getElementById('cartCheckoutApplyVoucher')?.addEventListener('click', async () => { await window.promotionReady; promotion = window.calculatePromotion(checkoutVoucher.value, checkoutItems.reduce((sum, item) => sum + item.price * item.qty, 0), shippingFee); checkoutMessage.textContent = promotion.valid ? `${promotion.label} applied.` : (promotion.message || 'Voucher code not found.'); checkoutMessage.classList.toggle('invalid', !promotion.valid); refreshCheckoutTotal(); });
   document.querySelectorAll('#cartCheckoutPayment button').forEach((button) => button.addEventListener('click', () => { selectedPayment = button.dataset.method; paymentStarted = false; checkoutSubmit.textContent = 'Continue to Payment'; checkoutGateway.classList.remove('active'); document.querySelectorAll('#cartCheckoutPayment button').forEach((item) => item.classList.toggle('selected', item === button)); }));
 
   checkoutSubmit?.addEventListener('click', async () => {

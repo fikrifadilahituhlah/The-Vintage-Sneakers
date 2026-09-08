@@ -284,8 +284,8 @@
         <h2>Vault Access</h2>
         <p>A standing list of collectors who see new pairs before they're listed publicly, and who can put in a sourcing request for a specific release, size, or colorway we'll go hunt down.</p>
         <div class="discount-card" id="discountCard">
-          <strong>Voucher savings at checkout.</strong>
-          <p>Apply an active voucher at checkout to receive savings on your next Vault purchase.</p>
+          <strong>Marketplace voucher drops.</strong>
+          <p><strong>ONGKIRGRATIS</strong>: free shipping min. Rp 1.5M. <strong>HEMAT10</strong>: 10% off min. Rp 2M. <strong>HEMAT150</strong> and <strong>HEMAT300</strong>: instant discounts from Rp 3M.</p>
         </div>
         <ul class="member-list">
           <li>48-hour early access to every new Vault drop</li>
@@ -556,14 +556,14 @@
         <button class="account-link" id="profileButton">Profile</button>
         <button class="account-link" id="logoutButton">Sign Out</button>
       `;
-      discountCard.innerHTML = `<strong>Welcome back, ${currentUser.name.split(' ')[0]}!</strong><p>Apply an active voucher at checkout to receive savings.</p>`;
+      discountCard.innerHTML = `<strong>Welcome back, ${currentUser.name.split(' ')[0]}!</strong><p><strong>ONGKIRGRATIS</strong>: free shipping min. Rp 1.5M. <strong>HEMAT10</strong>: 10% off min. Rp 2M. <strong>HEMAT150</strong> and <strong>HEMAT300</strong>: instant discounts from Rp 3M.</p>`;
       refreshProductPrices();
       return;
     }
     authButton.style.display = 'inline-block';
     accountMenu.style.display = 'none';
     authButton.textContent = 'Sign In';
-    discountCard.innerHTML = `<strong>Voucher savings at checkout.</strong><p>Apply an active voucher code during checkout to receive savings.</p>`;
+    discountCard.innerHTML = `<strong>Marketplace voucher drops.</strong><p><strong>ONGKIRGRATIS</strong>: free shipping min. Rp 1.5M. <strong>HEMAT10</strong>: 10% off min. Rp 2M. <strong>HEMAT150</strong> and <strong>HEMAT300</strong>: instant discounts from Rp 3M.</p>`;
     refreshProductPrices();
   };
 

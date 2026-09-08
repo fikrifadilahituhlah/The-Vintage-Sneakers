@@ -365,7 +365,7 @@
     await window.promotionReady;
     directPromotion = window.calculatePromotion(directVoucherCode.value, directSubtotal, directShippingFee);
     if (!directPromotion.valid) {
-      directVoucherMessage.textContent = 'Voucher code not found.';
+      directVoucherMessage.textContent = directPromotion.message || 'Voucher code not found.';
       directVoucherMessage.classList.add('invalid');
     } else {
       directVoucherMessage.textContent = `${directPromotion.label} applied.`;

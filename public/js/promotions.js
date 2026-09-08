@@ -2,18 +2,29 @@ import { collection, getDocs, onSnapshot } from "https://www.gstatic.com/firebas
 
 const DEFAULT_VOUCHERS = {
   ONGKIRGRATIS: {
-    label: 'Gratis ongkir',
+    label: 'Free shipping up to Rp 25,000',
     type: 'shipping',
+    minSpend: 1500000,
+    shippingCap: 25000,
   },
-  CASHBACK10: {
-    label: 'Cashback 10%',
-    type: 'cashback',
+  HEMAT10: {
+    label: '10% off, max Rp 150,000',
+    type: 'discount_rate',
     rate: 0.1,
+    minSpend: 2000000,
+    maxDiscount: 150000,
   },
-  HEMAT50: {
-    label: 'Potongan Rp 50.000',
+  HEMAT150: {
+    label: 'Rp 150,000 off',
     type: 'discount',
-    amount: 50000,
+    amount: 150000,
+    minSpend: 3000000,
+  },
+  HEMAT300: {
+    label: 'Rp 300,000 off',
+    type: 'discount',
+    amount: 300000,
+    minSpend: 5000000,
   },
 };
 
@@ -70,12 +81,25 @@ export const calculatePromotion = (code, subtotal, shippingFee = 0) => {
   const voucher = vouchers[normalizedCode];
   if (!voucher) return { valid: false, code: normalizedCode };
 
+  const minSpend = Number(voucher.minSpend || voucher.min_amount || 0);
+  if (subtotal < minSpend) {
+    return {
+      valid: false,
+      code: normalizedCode,
+      label: voucher.label,
+      minSpend,
+      message: `Spend at least Rp ${new Intl.NumberFormat('id-ID').format(minSpend)} to use this voucher.`,
+    };
+  }
+
   const discount = voucher.type === 'discount'
-    ? Math.min(voucher.amount, subtotal)
-    : voucher.type === 'cashback'
-      ? Math.round(subtotal * voucher.rate)
+    ? Math.min(Number(voucher.amount || 0), subtotal)
+    : voucher.type === 'discount_rate' || voucher.type === 'cashback'
+      ? Math.min(Math.round(subtotal * Number(voucher.rate || 0)), Number(voucher.maxDiscount || Number.MAX_SAFE_INTEGER))
       : 0;
-  const shippingDiscount = voucher.type === 'shipping' ? shippingFee : 0;
+  const shippingDiscount = voucher.type === 'shipping'
+    ? Math.min(shippingFee, Number(voucher.shippingCap || shippingFee))
+    : 0;
 
   return {
     valid: true,
