@@ -95,6 +95,7 @@ window.VintageAuth = {
 
     async signInWithGoogle() {
       const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: 'select_account' });
       const cred = await signInWithPopup(auth, provider);
       await setDoc(doc(db, "users", cred.user.uid), {
         name: cred.user.displayName || cred.user.email,
