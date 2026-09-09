@@ -465,6 +465,17 @@
   const signupForm = document.getElementById('signupForm');
   const priceEls = Array.from(document.querySelectorAll('.price'));
   const formatIDR = (value) => new Intl.NumberFormat('id-ID').format(value);
+  const normalizeCustomerName = (value) => String(value || '').replace(/\s+/g, ' ').trim().toLowerCase().replace(/\b([a-z])/g, (letter) => letter.toUpperCase());
+
+  const signupName = document.getElementById('signupName');
+  signupName?.addEventListener('input', () => {
+    signupName.value = normalizeCustomerName(signupName.value);
+  });
+
+  const profileNameInput = document.getElementById('profileNameInput');
+  profileNameInput?.addEventListener('input', () => {
+    profileNameInput.value = normalizeCustomerName(profileNameInput.value);
+  });
 
   let currentUser = null; // { uid, email, name } or null when signed out
 
@@ -523,7 +534,6 @@
   const profileModal = document.getElementById('profileModal');
   const profileClose = document.getElementById('profileClose');
   const profileEmailInput = document.getElementById('profileEmailInput');
-  const profileNameInput = document.getElementById('profileNameInput');
   const saveProfileName = document.getElementById('saveProfileName');
   const profileMessage = document.querySelector('.profile-message');
 
@@ -576,7 +586,8 @@
   saveProfileName?.addEventListener('click', async (event) => {
     event.preventDefault();
     if (!currentUser) return;
-    const newName = profileNameInput.value.trim();
+    const newName = normalizeCustomerName(profileNameInput.value.trim());
+    profileNameInput.value = newName;
     if (!newName) {
       profileMessage.textContent = 'Please enter a display name.';
       return;
@@ -669,7 +680,9 @@
 
   signupForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const name = document.getElementById('signupName').value.trim();
+    const rawName = normalizeCustomerName(document.getElementById('signupName').value.trim());
+    document.getElementById('signupName').value = rawName;
+    const name = rawName;
     const email = document.getElementById('signupEmail').value.trim().toLowerCase();
     const password = document.getElementById('signupPassword').value;
     const message = signupForm.querySelector('.form-message');

@@ -35,6 +35,7 @@
   const checkoutFormView = document.getElementById('cartCheckoutFormView');
   const checkoutSuccess = document.getElementById('cartCheckoutSuccess');
   const checkoutTotal = document.getElementById('cartCheckoutTotal');
+  const checkoutCustomerName = document.getElementById('cartCheckoutName');
   const checkoutVoucher = document.getElementById('cartCheckoutVoucher');
   const checkoutVoucherSelect = document.getElementById('cartCheckoutVoucherSelect');
   const checkoutMessage = document.getElementById('cartCheckoutMessage');
@@ -43,6 +44,11 @@
   const checkoutPrintReceipt = document.getElementById('cartCheckoutPrintReceipt');
   const checkoutWarrantyLink = document.getElementById('cartCheckoutWarrantyLink');
   const shippingFee = 25000;
+  const normalizeCustomerName = (value) => String(value || '').replace(/\s+/g, ' ').trim().toLowerCase().replace(/\b([a-z])/g, (letter) => letter.toUpperCase());
+
+  checkoutCustomerName?.addEventListener('input', () => {
+    checkoutCustomerName.value = normalizeCustomerName(checkoutCustomerName.value);
+  });
 
   const renderCartCheckoutVoucherOptions = () => {
     const choices = window.getAvailableVouchers ? window.getAvailableVouchers() : [];

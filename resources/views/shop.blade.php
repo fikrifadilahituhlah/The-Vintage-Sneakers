@@ -228,6 +228,11 @@
   const directGatewayPanel = document.getElementById('directGatewayPanel');
   const directConfirmPayment = document.getElementById('directConfirmPayment');
   const directWarrantyLink = document.getElementById('directWarrantyLink');
+  const normalizeCustomerName = (value) => String(value || '').replace(/\s+/g, ' ').trim().toLowerCase().replace(/\b([a-z])/g, (letter) => letter.toUpperCase());
+
+  directCheckoutName?.addEventListener('input', () => {
+    directCheckoutName.value = normalizeCustomerName(directCheckoutName.value);
+  });
 
   const renderDirectVoucherOptions = () => {
     const choices = window.getAvailableVouchers ? window.getAvailableVouchers() : [];
