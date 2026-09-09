@@ -37,6 +37,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 window.VintageFirebase = { auth, db };
+window.shopUser = null;
 
 // list of callbacks other pages/scripts register via VintageAuth.onChange()
 const listeners = [];
@@ -49,6 +50,7 @@ function notify(user) {
 
 onAuthStateChanged(auth, async (fbUser) => {
   if (!fbUser) {
+    window.shopUser = null;
     notify(null);
     return;
   }
@@ -57,10 +59,14 @@ onAuthStateChanged(auth, async (fbUser) => {
     const profile = snap.exists()
       ? snap.data()
       : { name: fbUser.displayName || fbUser.email, email: fbUser.email };
-    notify({ uid: fbUser.uid, email: fbUser.email, name: profile.name });
+    const user = { uid: fbUser.uid, email: fbUser.email, name: profile.name };
+    window.shopUser = user;
+    notify(user);
   } catch (e) {
     console.error("Failed to load user profile:", e);
-    notify({ uid: fbUser.uid, email: fbUser.email, name: fbUser.displayName || fbUser.email });
+    const user = { uid: fbUser.uid, email: fbUser.email, name: fbUser.displayName || fbUser.email };
+    window.shopUser = user;
+    notify(user);
   }
 });
 

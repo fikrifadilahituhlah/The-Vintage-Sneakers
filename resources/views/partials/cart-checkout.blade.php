@@ -97,6 +97,7 @@
     checkoutSubmit.textContent = 'Continue to Payment';
     renderCartCheckoutVoucherOptions();
     refreshCheckoutTotal();
+    checkoutCustomerName.value = window.shopUser?.name || '';
     checkoutOverlay.classList.add('active');
     checkoutOverlay.setAttribute('aria-hidden', 'false');
   };
