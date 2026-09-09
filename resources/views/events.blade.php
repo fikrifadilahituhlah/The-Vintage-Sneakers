@@ -187,8 +187,7 @@
       accountButton.innerHTML = `<span class="account-avatar">${initials}</span><span>${firstName}</span> ▾`;
       accountDropdown.innerHTML = `
         <div class="account-summary">
-          <strong>${user.name}</strong><br>
-          <span>${user.email}</span>
+          <strong>${user.name}</strong>
         </div>
         <button class="account-link" id="logoutButton">Sign Out</button>
       `;

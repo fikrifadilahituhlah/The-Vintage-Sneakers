@@ -560,8 +560,7 @@
       accountButton.innerHTML = `<span class="account-avatar">${initials}</span><span>${firstName}</span> ▾`;
       accountDropdown.innerHTML = `
         <div class="account-summary">
-          <strong>${currentUser.name}</strong><br>
-          <span>${currentUser.email}</span>
+          <strong>${currentUser.name}</strong>
         </div>
         <button class="account-link" id="profileButton">Profile</button>
         <button class="account-link" id="logoutButton">Sign Out</button>
