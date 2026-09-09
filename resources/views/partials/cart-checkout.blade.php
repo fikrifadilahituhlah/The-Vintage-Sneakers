@@ -85,6 +85,10 @@
 
   const openCheckout = async (event) => {
     event.preventDefault();
+    if (!window.shopUser) {
+      alert('Please sign in first to continue checkout.');
+      return;
+    }
     checkoutItems = await window.VintageCart.getItems();
     if (!checkoutItems.length) return;
     checkoutFormView.style.display = 'block';
