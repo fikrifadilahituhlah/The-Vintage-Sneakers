@@ -159,7 +159,9 @@
       <label class="direct-checkout-field">Shipping address<input id="directCheckoutAddress" type="text" placeholder="Street name, house number" required></label>
       <div class="direct-checkout-fields"><label class="direct-checkout-field">City<input id="directCheckoutCity" type="text" placeholder="City" required></label><label class="direct-checkout-field">Postal code<input id="directCheckoutPostalCode" type="text" inputmode="numeric" placeholder="401xx" required></label></div>
       <label class="direct-checkout-field">Courier<select id="directCheckoutCourier" required><option value="">Select a courier</option><option value="JNE">JNE</option><option value="SiCepat">SiCepat</option><option value="GoSend">GoSend</option></select></label>
-      <div class="direct-voucher"><label class="direct-checkout-field">Voucher code<input id="directVoucherCode" type="text" placeholder="Example: ONGKIRGRATIS"></label><button type="button" class="direct-voucher-apply" id="directApplyVoucher">Apply voucher</button></div><p class="direct-voucher-message" id="directVoucherMessage" aria-live="polite"></p>
+      <div class="direct-voucher"><label class="direct-checkout-field">Voucher code<input id="directVoucherCode" type="text" placeholder="Example: ONGKIRGRATIS"></label><button type="button" class="direct-voucher-apply" id="directApplyVoucher">Apply voucher</button></div>
+      <label class="direct-checkout-field">Choose discount<select id="directVoucherSelect"><option value="">Choose a voucher</option></select></label>
+      <p class="direct-voucher-message" id="directVoucherMessage" aria-live="polite"></p>
       <div class="direct-checkout-field">Select a payment method</div>
       <div class="direct-payment-options" id="directPaymentOptions"><button type="button" class="direct-payment-option selected" data-method="QRIS">QRIS</button><button type="button" class="direct-payment-option" data-method="Transfer Bank">Transfer Bank</button><button type="button" class="direct-payment-option" data-method="Tunai" disabled>Tunai</button></div>
       <div class="direct-gateway-panel" id="directGatewayPanel"></div>
@@ -220,11 +222,24 @@
   const directCheckoutPostalCode = document.getElementById('directCheckoutPostalCode');
   const directCheckoutCourier = document.getElementById('directCheckoutCourier');
   const directVoucherCode = document.getElementById('directVoucherCode');
+  const directVoucherSelect = document.getElementById('directVoucherSelect');
   const directApplyVoucher = document.getElementById('directApplyVoucher');
   const directVoucherMessage = document.getElementById('directVoucherMessage');
   const directGatewayPanel = document.getElementById('directGatewayPanel');
   const directConfirmPayment = document.getElementById('directConfirmPayment');
   const directWarrantyLink = document.getElementById('directWarrantyLink');
+
+  const renderDirectVoucherOptions = () => {
+    const choices = window.getAvailableVouchers ? window.getAvailableVouchers() : [];
+    if (!directVoucherSelect) return;
+    directVoucherSelect.innerHTML = `<option value="">Choose a voucher</option>${choices.map((voucher) => `<option value="${voucher.code}">${voucher.code} · ${voucher.label}</option>`).join('')}`;
+  };
+
+  const applyDirectVoucherSelection = () => {
+    if (!directVoucherSelect || !directVoucherSelect.value) return;
+    directVoucherCode.value = directVoucherSelect.value;
+    directApplyVoucher?.click();
+  };
   const printDirectReceipt = () => {
     const receiptWindow = window.open('', '_blank', 'width=520,height=700');
     if (!receiptWindow) return;
@@ -323,9 +338,11 @@
     directSubtotal = Number(currentProduct.price);
     directProductName.textContent = `${currentProduct.name} / Size ${selectedSize}`;
     directVoucherCode.value = '';
+    directVoucherSelect.value = '';
     directVoucherMessage.textContent = '';
     directVoucherMessage.classList.remove('invalid');
     directPromotion = { valid: false };
+    renderDirectVoucherOptions();
     updateDirectTotal();
     directCheckoutName.value = window.shopUser?.name || '';
     directCheckoutPhone.value = '';
@@ -350,7 +367,7 @@
     directCheckoutOverlay.classList.remove('active');
     directCheckoutOverlay.setAttribute('aria-hidden', 'true');
   });
-
+  directVoucherSelect?.addEventListener('change', applyDirectVoucherSelection);
   document.querySelectorAll('.direct-payment-option').forEach((option) => {
     option.addEventListener('click', () => {
       directPaymentMethod = option.dataset.method;

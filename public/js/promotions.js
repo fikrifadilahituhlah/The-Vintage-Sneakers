@@ -112,6 +112,18 @@ export const calculatePromotion = (code, subtotal, shippingFee = 0) => {
   };
 };
 
+window.DEFAULT_VOUCHERS = DEFAULT_VOUCHERS;
+window.getAvailableVouchers = () => Object.keys(vouchers).sort().map((code) => ({
+  code,
+  label: vouchers[code].label || code,
+  type: vouchers[code].type || 'voucher',
+  minSpend: Number(vouchers[code].minSpend || vouchers[code].min_amount || 0),
+  amount: Number(vouchers[code].amount || 0),
+  rate: Number(vouchers[code].rate || 0),
+  maxDiscount: Number(vouchers[code].maxDiscount || 0),
+  shippingCap: Number(vouchers[code].shippingCap || 0),
+}));
+
 window.calculatePromotion = calculatePromotion;
 window.promotionReady = promotionReady;
 window.refreshPromotions = refreshPromotions;

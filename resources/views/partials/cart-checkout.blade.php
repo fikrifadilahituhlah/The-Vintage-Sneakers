@@ -20,7 +20,9 @@
       <label class="cart-checkout-field">Shipping address<input id="cartCheckoutAddress" type="text" placeholder="Street name, house number" required></label>
       <div class="cart-checkout-fields"><label class="cart-checkout-field">City<input id="cartCheckoutCity" type="text" placeholder="City" required></label><label class="cart-checkout-field">Postal code<input id="cartCheckoutPostalCode" type="text" inputmode="numeric" placeholder="401xx" required></label></div>
       <label class="cart-checkout-field">Courier<select id="cartCheckoutCourier" required><option value="">Select a courier</option><option value="JNE">JNE</option><option value="SiCepat">SiCepat</option><option value="GoSend">GoSend</option></select></label>
-      <div class="cart-checkout-voucher"><label class="cart-checkout-field">Voucher code<input id="cartCheckoutVoucher" type="text" placeholder="Example: ONGKIRGRATIS"></label><button type="button" id="cartCheckoutApplyVoucher">Apply voucher</button></div><p class="cart-checkout-message" id="cartCheckoutMessage" aria-live="polite"></p>
+      <div class="cart-checkout-voucher"><label class="cart-checkout-field">Voucher code<input id="cartCheckoutVoucher" type="text" placeholder="Example: ONGKIRGRATIS"></label><button type="button" id="cartCheckoutApplyVoucher">Apply voucher</button></div>
+      <label class="cart-checkout-field">Choose discount<select id="cartCheckoutVoucherSelect"><option value="">Choose a voucher</option></select></label>
+      <p class="cart-checkout-message" id="cartCheckoutMessage" aria-live="polite"></p>
       <div class="cart-checkout-field">Select a payment method</div><div class="cart-checkout-payment" id="cartCheckoutPayment"><button type="button" class="selected" data-method="QRIS">QRIS</button><button type="button" data-method="Bank Transfer">Bank Transfer</button><button type="button" data-method="Cash">Cash</button></div>
       <div class="cart-checkout-gateway" id="cartCheckoutGateway"></div><button type="button" class="cart-checkout-submit" id="cartCheckoutSubmit">Continue to Payment</button>
     </div>
@@ -34,12 +36,25 @@
   const checkoutSuccess = document.getElementById('cartCheckoutSuccess');
   const checkoutTotal = document.getElementById('cartCheckoutTotal');
   const checkoutVoucher = document.getElementById('cartCheckoutVoucher');
+  const checkoutVoucherSelect = document.getElementById('cartCheckoutVoucherSelect');
   const checkoutMessage = document.getElementById('cartCheckoutMessage');
   const checkoutGateway = document.getElementById('cartCheckoutGateway');
   const checkoutSubmit = document.getElementById('cartCheckoutSubmit');
   const checkoutPrintReceipt = document.getElementById('cartCheckoutPrintReceipt');
   const checkoutWarrantyLink = document.getElementById('cartCheckoutWarrantyLink');
   const shippingFee = 25000;
+
+  const renderCartCheckoutVoucherOptions = () => {
+    const choices = window.getAvailableVouchers ? window.getAvailableVouchers() : [];
+    if (!checkoutVoucherSelect) return;
+    checkoutVoucherSelect.innerHTML = `<option value="">Choose a voucher</option>${choices.map((voucher) => `<option value="${voucher.code}">${voucher.code} · ${voucher.label}</option>`).join('')}`;
+  };
+
+  const applyCartVoucherSelection = () => {
+    if (!checkoutVoucherSelect || !checkoutVoucherSelect.value) return;
+    checkoutVoucher.value = checkoutVoucherSelect.value;
+    document.getElementById('cartCheckoutApplyVoucher')?.click();
+  };
   let checkoutItems = [];
   let selectedPayment = 'QRIS';
   let paymentStarted = false;
@@ -69,14 +84,18 @@
     checkoutFormView.style.display = 'block';
     checkoutSuccess.classList.remove('active');
     checkoutVoucher.value = '';
+    checkoutVoucherSelect.value = '';
     checkoutMessage.textContent = '';
     paymentStarted = false;
     checkoutGateway.classList.remove('active');
     checkoutSubmit.textContent = 'Continue to Payment';
+    renderCartCheckoutVoucherOptions();
     refreshCheckoutTotal();
     checkoutOverlay.classList.add('active');
     checkoutOverlay.setAttribute('aria-hidden', 'false');
   };
+
+  checkoutVoucherSelect?.addEventListener('change', applyCartVoucherSelection);
 
   document.addEventListener('click', (event) => {
     if (event.target.closest('#cartCheckout')) openCheckout(event);
